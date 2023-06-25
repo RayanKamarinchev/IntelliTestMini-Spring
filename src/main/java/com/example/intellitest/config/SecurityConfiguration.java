@@ -34,11 +34,11 @@ public class SecurityConfiguration {
                 .and()
                 //configure form logging
                 .formLogin()
-                .loginPage("auth/login")
+                .loginPage("/auth/login")
                 .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
                 .defaultSuccessUrl("/")
-                .failureForwardUrl("auth/login-error")
+                .failureForwardUrl("/auth/login-error")
                 .and().logout()
                 .logoutUrl("/auth/logout")
                 .logoutSuccessUrl("/")
@@ -54,10 +54,10 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
     
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new ApplicationUserDetailsService(userRepository);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(UserRepository userRepository) {
+//        return new ApplicationUserDetailsService(userRepository);
+//    }
     
     @Bean
     public SecurityContextRepository securityContextRepository() {

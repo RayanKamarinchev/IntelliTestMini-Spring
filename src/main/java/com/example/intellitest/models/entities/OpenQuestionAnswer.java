@@ -11,12 +11,10 @@ public class OpenQuestionAnswer extends BaseEntity{
     @Column
     private String answer;
     
-    @Column(nullable = false)
     @ManyToOne
     private OpenQuestion question;
     
     @ManyToOne
-    @Column
     private Student student;
     
     @Column(nullable = false)

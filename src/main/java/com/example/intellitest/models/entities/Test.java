@@ -33,18 +33,15 @@ public class Test extends BaseEntity {
    @Column(nullable = false)
     private Date createdOn;
    
-   @Column
     @OneToMany
     private List<OpenQuestion> openQuestions;
     
-    @Column
     @OneToMany
     private List<ClosedQuestion> closedQuestions;
     
     @Column(nullable = false)
-    private Boolean IsDeleted;
+    private boolean isDeleted;
     
-    @Column(nullable = false)
     @ManyToOne
     private Teacher creator;
     
@@ -52,11 +49,9 @@ public class Test extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private PublicityType publicityType;
     
-    @Column(nullable = false)
     @OneToMany
     private List<TestLike> testLikes;
     
-    @Column(nullable = false)
     @OneToMany
     private List<TestResult> testResults;
     
@@ -125,11 +120,11 @@ public class Test extends BaseEntity {
     }
     
     public Boolean getDeleted() {
-        return IsDeleted;
+        return isDeleted;
     }
     
     public void setDeleted(Boolean deleted) {
-        IsDeleted = deleted;
+        isDeleted = deleted;
     }
     
     public Teacher getCreator() {

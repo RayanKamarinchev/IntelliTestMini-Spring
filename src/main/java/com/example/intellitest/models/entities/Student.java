@@ -7,22 +7,18 @@ import java.util.List;
 @Entity
 @Table(name = "Students")
 public class Student extends BaseEntity{
-    @Column(nullable = false)
     @OneToOne
     private User user;
     
     @Column(nullable = false)
     private String school;
     
-    @Column(nullable = false)
     @OneToMany
     private List<TestResult> testResults;
     
-    @Column(nullable = false)
     @OneToMany
     private List<OpenQuestionAnswer> openQuestionAnswers;
     
-    @Column(nullable = false)
     @OneToMany
     private List<ClosedQuestionAnswer> closedQuestionAnswers;
     

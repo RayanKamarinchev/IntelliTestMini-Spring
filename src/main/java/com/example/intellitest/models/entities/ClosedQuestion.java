@@ -22,14 +22,12 @@ public class ClosedQuestion extends BaseEntity{
     @Column(nullable = false)
     private Boolean IsDeleted;
     
-    @Column(nullable = false)
     @ManyToOne
     private Test test;
     
     @Column(nullable = false)
     private Integer maxScore;
     
-    @Column
     @OneToMany()
     private List<ClosedQuestionAnswer> closedQuestionAnswers;
     

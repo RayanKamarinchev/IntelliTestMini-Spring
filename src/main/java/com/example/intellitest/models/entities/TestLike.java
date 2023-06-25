@@ -8,11 +8,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "TestLikes")
 public class TestLike extends BaseEntity{
-    @Column(nullable = false)
     @ManyToOne
     private User user;
     
-    @Column(nullable = false)
     @ManyToOne
     private Test test;
     

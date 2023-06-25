@@ -11,11 +11,9 @@ public class ClosedQuestionAnswer extends BaseEntity{
     @Column
     private String answerIndexes;
     
-    @Column(nullable = false)
     @ManyToOne
     private ClosedQuestion closedQuestion;
     
-    @Column(nullable = false)
     @ManyToOne
     private Student student;
     

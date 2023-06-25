@@ -7,14 +7,12 @@ import java.util.List;
 @Entity
 @Table(name="Teachers")
 public class Teacher extends BaseEntity {
-    @Column(nullable = false)
     @OneToOne
     private User user;
     
     @Column(nullable = false)
     private String school;
     
-    @Column(nullable = false)
     @OneToMany
     private List<Test> tests;
     

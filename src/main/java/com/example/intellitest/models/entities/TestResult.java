@@ -10,11 +10,9 @@ import java.util.Date;
 @Entity
 @Table(name = "TestResults")
 public class TestResult extends BaseEntity{
-    @Column(nullable = false)
     @ManyToOne
     private Test test;
     
-    @Column(nullable = false)
     @ManyToOne
     private Student student;
     

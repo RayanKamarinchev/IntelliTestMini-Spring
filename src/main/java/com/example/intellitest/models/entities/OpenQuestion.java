@@ -19,7 +19,6 @@ public class OpenQuestion extends BaseEntity{
     @Column(nullable = false)
     private Boolean IsDeleted;
     
-    @Column(nullable = false)
     @ManyToOne
     private Test test;
     
