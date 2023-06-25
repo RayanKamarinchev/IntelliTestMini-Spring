@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+
+<header>
+  <nav th:fragment="navigation" class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+          <li class="nav-item">
+            <a class="navbar-brand logo" th:href="@{/home/all}">
+              <span class="logoCol1">Intelli</span><span class="logoCol2">Test</span>
+            </a>
+          </li>
+          <th:block sec:authorize="isAuthenticated()">
+            <li class="nav-item align-items-center d-flex">
+              <a class="nav-link text-dark" th:href="test/all">Тестове</a>
+            </li>
+            <li style="display: flex;
+                                    align-items: center;">
+              <a style="font-weight: 500;">@(user.FirstName +" "+ user.LastName[0]+".")</a>
+            </li>
+            <li class="nav-item">
+
+              <a th:href="user/profile" class="nav-link text-dark">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                     alt="" style="width: 40px; height: 40px; margin-left: 10px; border-radius: 100%;">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a type="submit" class="nav-link text-dark" th:href="user/logout"
+                 asp-route-id="@UserManager.GetUserId(User)">
+                <i class="fa fa-sign-out"></i>
+                <span>Logout</span>
+              </a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="!isAuthenticated()">
+            <li class="nav-item">
+              <a class="nav-link text-dark" asp-controller="User" asp-action="Register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" asp-controller="User" asp-action="Login">Login</a>
+            </li>
+          </th:block>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,21 @@
+logging:
+  level:
+    blog: WARN
+    org: WARN
+    org.hibernate.SQL: DEBUG
+server:
+  port: 8000
+spring:
+  datasource:
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    password: 1234
+    url: jdbc:sqlserver://localhost\SQLEXPRESS:1433;databaseName=SpringTest;integratedSecurity=false;trustServerCertificate=true;
+    username: rayan
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        format_sql: false
+        show_sql: false
