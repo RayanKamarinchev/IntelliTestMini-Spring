@@ -1,6 +1,5 @@
 package com.example.intellitest.models.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -9,16 +8,16 @@ import jakarta.persistence.Table;
 @Table(name = "TestLikes")
 public class TestLike extends BaseEntity{
     @ManyToOne
-    private User user;
+    private UserEntity user;
     
     @ManyToOne
     private Test test;
     
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
     
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
     

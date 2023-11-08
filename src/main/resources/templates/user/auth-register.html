@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <span th:replace="~{fragments/head}"></span>
+<head th:replace="~{fragments/head}">
 </head>
 
 <body>
@@ -15,8 +14,8 @@
 
   <h2 class="text-center text-white">Register User</h2>
 
-  <form th:method="POST"
-        th:action="@{/users/register}"
+  <form th:method="post"
+        th:action="@{/auth/register}"
         th:object="${userRegisterForm}"
         class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
@@ -44,7 +43,8 @@
         <label th:for="lastName"
                class="text-white font-weight-bold">Last Name</label>
 
-        <input th:field="*{lastName}"
+        <input type="text"
+               th:field="*{lastName}"
                class="form-control"
                placeholder="Last name"
         />
@@ -61,13 +61,13 @@
 
         <label th:for="email"
                class="text-white font-weight-bold">
-          Username
+          Email
         </label>
 
-        <input th:field="*{email}"
+        <input type="text"
+               th:field="*{email}"
                class="form-control"
-               placeholder="Email"
-               th:value="*{email}"/>
+               placeholder="Email"/>
         <p th:if="${#fields.hasErrors('email')}"
            class="errors alert alert-danger">
           Valid email is required.
@@ -83,6 +83,7 @@
         </label>
         <input id="password"
                name="password"
+               th:field="*{password}"
                type="password"
                class="form-control"
                placeholder="Password"
@@ -103,8 +104,7 @@
         <input id="confirmPassword"
                name="confirmPassword"
                type="password"
-               min="2"
-               max="20"
+               th:field="*{confirmPassword}"
                class="form-control"
                placeholder="Password"/>
 
@@ -112,6 +112,9 @@
            class="errors alert alert-danger">
           Passwords does not match.
         </p>
+        <ul>
+          <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </ul>
 
       </div>
     </div>

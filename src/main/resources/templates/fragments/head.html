@@ -1,25 +1,29 @@
-<!--<head th:fragment="head">-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>IntelliTest</title>-->
-<!--    <meta name="viewport">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
-<!--    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
-<!--    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{css/}"/>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>-->
-<!--&lt;!&ndash;    <link rel="stylesheet" href="../../static/css/index.css"/>&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" href="../../static/css/sideSearch.css"/>&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" href="../../static/css/edit.css"/>&ndash;&gt;-->
-<!--    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">-->
-<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>-->
-<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/0.4.0/chartjs-plugin-datalabels.min.js"></script>-->
-<!--</head>-->
+<head th:fragment="header">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-wIdth, initial-scale=1.0"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sideSearch.css}"/>
+    <link rel="stylesheet" th:href="@{/css/edit.css}"/>
+    <link rel="stylesheet" th:href="@{/lib/font-awesome/css/all.css}"/>
 
-<head th:fragment="head">
-    <meta charset="UTF-8">
-    <title>IntelliTest</title>
-    <link rel="stylesheet" href="/css/home.css"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <script src="/js/jquery-3.5.1.slim.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js" type="text/javascript"></script>
+
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <script th:src="@{/lib/font-awesome/js/all.js}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/0.4.0/chartjs-plugin-datalabels.min.js"></script>
+    <script th:src="@{/lib/sweetalert2/sweetalert2.all.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/lib/sweetalert2/sweetalert2.min.css}"/>
+    <script>
+        const colors = ["#4797f2", "#ECA400", "#47f2a2", "#a247f2", "#D81159", "#493B2A", "#BF3100"]
+        const gradeColors = ["#2CE574", "#CDF03A", "#FFE500", "#FF9600", "#FF3924"]
+        const gradeContrastColors = ["#26C282","#309CD7", "#F6CC17", "#F57455", "#EB4E5D"]
+
+    </script>
 </head>

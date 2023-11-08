@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @PasswordMatch(password = "password", confirmPassword = "confirmPassword")
-public class UserRegisterViewModel {
+public class RegisterViewModel {
     @NotBlank
     @Email
     private String email;
@@ -32,7 +32,7 @@ public class UserRegisterViewModel {
         return email;
     }
     
-    public UserRegisterViewModel setEmail(String email) {
+    public RegisterViewModel setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -41,7 +41,7 @@ public class UserRegisterViewModel {
         return password;
     }
     
-    public UserRegisterViewModel setPassword(String password) {
+    public RegisterViewModel setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -50,7 +50,7 @@ public class UserRegisterViewModel {
         return confirmPassword;
     }
     
-    public UserRegisterViewModel setConfirmPassword(String confirmPassword) {
+    public RegisterViewModel setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
         return this;
     }
@@ -59,7 +59,7 @@ public class UserRegisterViewModel {
         return firstName;
     }
     
-    public UserRegisterViewModel setFirstName(String firstName) {
+    public RegisterViewModel setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -68,7 +68,7 @@ public class UserRegisterViewModel {
         return lastName;
     }
     
-    public UserRegisterViewModel setLastName(String lastName) {
+    public RegisterViewModel setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }

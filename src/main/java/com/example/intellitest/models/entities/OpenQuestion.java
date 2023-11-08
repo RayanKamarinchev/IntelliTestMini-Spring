@@ -28,6 +28,30 @@ public class OpenQuestion extends BaseEntity{
     @Column(nullable = false)
     private Integer maxScore;
     
+    @Column(nullable = false)
+    private boolean isEquation;
+    
+    @Column
+    private String ImagePath;
+    
+    public boolean isEquation() {
+        return isEquation;
+    }
+    
+    public OpenQuestion setEquation(boolean equation) {
+        isEquation = equation;
+        return this;
+    }
+    
+    public String getImagePath() {
+        return ImagePath;
+    }
+    
+    public OpenQuestion setImagePath(String imagePath) {
+        ImagePath = imagePath;
+        return this;
+    }
+    
     public String getQuestion() {
         return question;
     }

@@ -1,20 +1,25 @@
 package com.example.intellitest.web;
 
-import com.example.intellitest.models.dtos.users.UserRegisterViewModel;
+import com.example.intellitest.models.dtos.users.LoginViewModel;
+import com.example.intellitest.models.dtos.users.RegisterViewModel;
 import com.example.intellitest.services.UserService;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping("/auth")
-public class UserController {
+public class UserController extends BaseController {
     private static final String BINDING_RESULT_PATH = "org.springframework.validation.BindingResult.";
     private final UserService userService;
     
@@ -22,48 +27,46 @@ public class UserController {
         this.userService = userService;
     }
     
-    @GetMapping("/register")
-    public String getRegister() {
-        return "auth-register";
+    @GetMapping("register")
+    public String getRegister(Model model) {
+        model.addAttribute("userRegisterForm", new RegisterViewModel());
+        return "user/auth-register";
     }
     
-    @PostMapping("/register")
+    @PostMapping("register")
     public String postRegister(
-            @Valid UserRegisterViewModel userRegisterForm,
+            @Valid RegisterViewModel userRegisterForm,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
-        
+            Model model) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes
-                    .addFlashAttribute("userRegisterForm", userRegisterForm)
-                    .addFlashAttribute(BINDING_RESULT_PATH + "userRegisterForm", bindingResult);
-            
-            return "redirect:/users/register";
+            model.addAttribute("userRegisterForm", userRegisterForm);
+            model.addAttribute(BINDING_RESULT_PATH + "userRegisterForm", bindingResult);
+            return "user/auth-register";
+        }
+        try{
+            userService.registerUser(userRegisterForm);
+        }
+        catch (IllegalArgumentException e){
+            bindingResult.addError(new ObjectError("email","Email already exists"));
+            model.addAttribute("userRegisterForm", userRegisterForm);
+            model.addAttribute(BINDING_RESULT_PATH + "userRegisterForm", bindingResult);
+            return "user/auth-register";
         }
         
-        userService.registerUser(userRegisterForm);
-        
-        return "redirect:/users/login";
+        return "redirect:/auth/login";
     }
     
-    @ModelAttribute(name = "userRegisterForm")
-    public UserRegisterViewModel initUserRegisterFormDto() {
-        return new UserRegisterViewModel();
+    @GetMapping("login")
+    private String getLogin(Model model){
+        model.addAttribute("userLoginForm", new LoginViewModel());
+        return "user/auth-login";
     }
     
-    @GetMapping("/login")
-    private String getLogin(){
-        return "auth-login";
-    }
-    
-    @PostMapping("/users/login-error")
-    public String onFailedLogin(
-            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
-            RedirectAttributes redirectAttributes) {
-        
-        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, username);
-        redirectAttributes.addFlashAttribute("bad_credentials", true);
-        
-        return "redirect:/users/login";
+    @PostMapping("/login-error")
+    public String login(@Valid LoginViewModel userLoginForm, Model model) {
+        System.out.println("errorMessage");
+        model.addAttribute("userLoginF-orm", userLoginForm);
+        model.addAttribute(BINDING_RESULT_PATH + "userLoginForm", userLoginForm);
+        return "user/auth-register";
     }
 }

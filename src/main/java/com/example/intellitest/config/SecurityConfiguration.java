@@ -1,14 +1,17 @@
 package com.example.intellitest.config;
 
+import com.example.intellitest.repositories.UserRepository;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.DelegatingSecurityContextRepository;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
@@ -18,6 +21,7 @@ import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointR
 
 @Configuration
 @EnableMethodSecurity
+@EnableWebSecurity
 public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity,
@@ -29,20 +33,25 @@ public class SecurityConfiguration {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 //Unauthorized urls
-                .requestMatchers("/", "/auth/login", "/auth/register", "/auth/login-error").permitAll()
+                                .requestMatchers( "/auth/login", "/auth/register", "/auth/login-error").permitAll()
                 .anyRequest().authenticated()
                 .and()
+//                .csrf().disable()
                 //configure form logging
-                .formLogin()
-                .loginPage("/auth/login")
-                .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-                .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
-                .defaultSuccessUrl("/")
-                .failureForwardUrl("/auth/login-error")
-                .and().logout()
-                .logoutUrl("/auth/logout")
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
+                    .formLogin()
+                    .loginPage("/auth/login")
+                    .loginProcessingUrl("/login/authenticate")
+                    .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
+                    .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
+                    .failureForwardUrl("/login-error")
+                    .defaultSuccessUrl("/", true)
+                .and()
+                .logout()
+                    .logoutUrl("/auth/logout")
+                    .logoutSuccessUrl("/auth/login")
+                    .invalidateHttpSession(true)
+                .and()
+                .rememberMe()
                 .and().securityContext()
                 .securityContextRepository(securityContextRepository);
         
@@ -54,10 +63,6 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
     
-//    @Bean
-//    public UserDetailsService userDetailsService(UserRepository userRepository) {
-//        return new ApplicationUserDetailsService(userRepository);
-//    }
     
     @Bean
     public SecurityContextRepository securityContextRepository() {

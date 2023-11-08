@@ -1,7 +1,5 @@
 package com.example.intellitest.models.dtos.tests;
 
-import com.example.intellitest.models.dtos.questions.ClosedQuestionViewModel;
-import com.example.intellitest.models.dtos.questions.OpenQuestionViewModel;
 import com.example.intellitest.models.entities.*;
 import com.example.intellitest.models.enums.PublicityType;
 import com.example.intellitest.models.enums.Subject;

@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "Students")
 public class Student extends BaseEntity{
     @OneToOne
-    private User user;
+    private UserEntity user;
     
     @Column(nullable = false)
     private String school;
@@ -22,11 +22,11 @@ public class Student extends BaseEntity{
     @OneToMany
     private List<ClosedQuestionAnswer> closedQuestionAnswers;
     
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
     
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
     

@@ -1,7 +1,7 @@
 package com.example.intellitest.models.dtos.tests;
 
-import com.example.intellitest.models.dtos.questions.ClosedQuestionViewModel;
-import com.example.intellitest.models.dtos.questions.OpenQuestionViewModel;
+import com.example.intellitest.models.dtos.questions.closed.ClosedQuestionViewModel;
+import com.example.intellitest.models.dtos.questions.open.OpenQuestionViewModel;
 import com.example.intellitest.models.enums.PublicityType;
 import jakarta.validation.constraints.NotNull;
 

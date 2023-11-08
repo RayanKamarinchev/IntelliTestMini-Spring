@@ -31,6 +31,30 @@ public class ClosedQuestion extends BaseEntity{
     @OneToMany()
     private List<ClosedQuestionAnswer> closedQuestionAnswers;
     
+    @Column(nullable = false)
+    private boolean isEquation;
+    
+    @Column
+    private String ImagePath;
+    
+    public boolean isEquation() {
+        return isEquation;
+    }
+    
+    public ClosedQuestion setEquation(boolean equation) {
+        isEquation = equation;
+        return this;
+    }
+    
+    public String getImagePath() {
+        return ImagePath;
+    }
+    
+    public ClosedQuestion setImagePath(String imagePath) {
+        ImagePath = imagePath;
+        return this;
+    }
+    
     public String getText() {
         return text;
     }
