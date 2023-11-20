@@ -1,8 +1,11 @@
 package com.example.intellitest.models.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -23,12 +26,41 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private Boolean IsDeleted;
     
+    @Column(nullable = true)
+    private String imagePath;
+    
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch= FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private List<Role> roles = new ArrayList<>();
+    
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+//
+////        list.add(new SimpleGrantedAuthority(role));
+//
+//        return list;
+//    }
+    
+    
+    public Boolean getDeleted() {
+        return IsDeleted;
+    }
+    
+    public void setDeleted(Boolean deleted) {
+        IsDeleted = deleted;
+    }
+    
+    public String getImagePath() {
+        return imagePath;
+    }
+    
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
     
     public String getEmail() {
         return email;

@@ -13,7 +13,7 @@ public abstract class BaseController {
         return this.view(viewName, new ModelAndView());
     }
     
-    public ModelAndView redirect(String url) {
-        return this.view("redirect:" + url); // redirect:redirect:/url
+    public String redirect(String url) {
+        return "redirect:" + url;
     }
 }

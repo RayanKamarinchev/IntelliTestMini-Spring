@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+<title> - IntelliTest</title>
+<body>
+
+<div>
+  <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+
+<div class="container-mother">
+  <main>
+    <div>
+      <main class="cd-main-content">
+        <div class="floating-container">
+          <a class="floating-button" th:if="${isTeacher}" th:href="/tests/create">+</a>
+        </div>
+        <section class="cd-gallery">
+          <div th:th:if="${message != null}" class="alert alert-success alert-dismissible fade show" role="alert" th:if="${message != null}">
+            <p th:text="message"></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert", aria-label="Close">
+              <span aria-hIdden="true">&times;</span>
+            </button>
+          </div>
+          <ul style="width: 100%" th:each="test: ${tests}">
+            <il th:replace="~{test-item(test)}"></il>
+          </ul>
+        </section>
+        <nav aria-label="Page navigation example" style="position: absolute; bottom: 20px; width: 100%">
+          <ul class="pagination justify-content-center" style="font-size: 1.5rem; position: relative; z-index: -1">
+            <li class="page-item disabled">
+            <a th:disabled="${formData.currentPage == 1}" class="page-link"
+               th:href="@{${'/tests'} + '?currentPage=' + ${formData.currentPage - 1} + '&subject=' + ${formData.subject} + '&grade=' + ${formData.grade} + '&searchTerm=' + ${formData.searchTerm} + '&sorting=' + ${formData.sorting}}">
+                Previous
+            </a>
+            </li>
+              <li class="page-item" th:each="i: ${#numbers.sequence(paginationStart, paginationEnd)}">
+                  <a th:disabled="${formData.currentPage == i}" class="page-link"
+                     th:href="@{${'/tests'} + '?currentPage=' + ${i} + '&subject=' + ${formData.subject} + '&grade=' + ${formData.grade} + '&searchTerm=' + ${formData.searchTerm} + '&sorting=' + ${formData.sorting}}">
+                      <span th:text="${i}"></span>
+                  </a>
+              </li>
+            <li class="page-item disabled">
+              <a th:disabled="${maxPage == formData.currentPage}"
+                 class="page-link"
+                 th:href="@{${'/tests'} + '?currentPage=' + ${formData.currentPage + 1} + '&subject=' + ${formData.subject} + '&grade=' + ${formData.grade} + '&searchTerm=' + ${formData.searchTerm} + '&sorting=' + ${formData.sorting}}">
+                  Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+          <div th:replace="~{fragments/filters}"></div>
+      </main>
+    </div>
+    @if (Model.Items.Count() == 0)
+    {
+    <div class="cd-fail-message">Няма резултати</div>
+    }
+    @section Scripts
+    {
+    <script src="~/js/filter.js"></script>
+    <script>
+      OnTrigger();
+      $("#main").css("margin-bottom", "0px");
+    </script>
+    }
+  </main>
+</div>
+
+<footer th:replace="~{fragments/footer}"></footer>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<form method="post">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Име</label>
+                        <input class="form-control" type="text"
+                               th:field="*{formData.firstName}">
+                        <span class="text-danger" th:if="${#fields.hasErrors('formData.firstName')}">Невалидно име</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input class="form-control" type="text"
+                               th:field="*{formData.lastName}">
+                        <span class="text-danger" th:if="${#fields.hasErrors('formData.lastName')}">Невалидна фамилия</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Училище</label>
+                        <input class="form-control" type="text"
+                               th:field="*{formData.school}">
+                        <span class="text-danger" th:if="${#fields.hasErrors('formData.school')}">Името на
+                            училището трябва да е между 2 и 50 знака</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <div class="text-center mb-3" style="display: flex; flex-direction: column;">
+                            <label>Аз съм... (ще трябва да влезете отново в профила си)</label>
+                            <div class="switch-button">
+                                <input class="switch-button-checkbox" th:field="*{formData.isStudent}"
+                                       type="checkbox"
+                                       th:disabled="${formData.isStudent || formData.isTeacher}"></input>
+                                <label class="switch-button-label">
+                                    <span class="switch-button-label-span">Ученик</span>
+                                </label>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 50px">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input class="form-control" type="password" th:field="*{formData.password}">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" type="text"
+                               th:field="*{formData.email}">
+                        <span class="text-danger" th:if="${#fields.hasErrors('formData.email')}">Невалиден
+                            имейл</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 50px">
+                <div class="col d-flex justify-content-end">
+                    <button class="btn btn-primary" type="submit">Запази</button>
+                </div>
+            </div>
+        </div>
+</form>

@@ -13,6 +13,14 @@ public class Role {
     @Column(name = "role", nullable = false)
     private String role;
     
+    public Role() {
+    }
+    
+    public Role(long id, String role) {
+        this.id = id;
+        this.role = role;
+    }
+    
     public Role setId(long id) {
         this.id = id;
         return this;

@@ -1,18 +1,57 @@
 package com.example.intellitest.models.dtos.users;
 
 import com.example.intellitest.models.enums.UserPanel;
+import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 public class EditUser {
+    @Size(min = 3, max = 20)
     private String firstName;
+    @Size(min = 3, max = 20)
     private String lastName;
     private String email;
     private String password;
     private boolean isTeacher;
+    private boolean isStudent;
     private UserPanel userPanel;
     private MultipartFile image;
-    private String imageUrl = "";
+    private String imagePath;
+    @Size(min = 3, max = 50)
     private String school = "";
+    private Long userId;
+    private String imageFolderPath;
+    
+    public boolean isTeacher() {
+        return isTeacher;
+    }
+    
+    public void setTeacher(boolean teacher) {
+        isTeacher = teacher;
+    }
+    
+    public Long getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    
+    public String getImageFolderPath() {
+        return imageFolderPath;
+    }
+    
+    public void setImageFolderPath(String imageFolderPath) {
+        this.imageFolderPath = imageFolderPath;
+    }
+    
+    public boolean getIsStudent() {
+        return isStudent;
+    }
+    
+    public void setIsStudent(boolean student) {
+        isStudent = student;
+    }
     
     public String getFirstName() {
         return firstName;
@@ -46,11 +85,11 @@ public class EditUser {
         this.password = password;
     }
     
-    public boolean isTeacher() {
+    public boolean getIsTeacher() {
         return isTeacher;
     }
     
-    public void setTeacher(boolean teacher) {
+    public void setIsTeacher(boolean teacher) {
         isTeacher = teacher;
     }
     
@@ -70,12 +109,12 @@ public class EditUser {
         this.image = image;
     }
     
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImagePath() {
+        return imagePath;
     }
     
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
     
     public String getSchool() {

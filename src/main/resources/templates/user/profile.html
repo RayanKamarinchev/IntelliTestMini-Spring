@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+<title>Profile - IntelliTest</title>
+<body>
+
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+
+<div class="container-mother">
+    <main>
+        <div class="e-profile">
+            <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                    <div class="mx-auto" style="width: 140px;">
+                        <div class="d-flex justify-content-center align-items-center rounded"
+                             style="height: 140px; background-color: rgb(233, 236, 239);">
+                            <img th:src="${formData.imagePath}" height="140" width="140"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                    <div class="text-center text-sm-left mb-2 mb-sm-0">
+                        <h5 class="pt-sm-2 pb-1 mb-0 text-nowrap"
+                            th:text="${formData.firstName + ' ' + formData.lastName}"></h5>
+                        <div class="mt-2">
+                            <form method="post" name="img" enctype="multipart/form-data">
+                                <label for="file-upload" class="btn btn-primary">
+                                    <i class="fa fa-fw fa-camera"></i>
+                                    <span>Change Photo</span>
+                                </label>
+                                <input style="display: none" id="file-upload" type="file" accept="image/*"
+                                       onchange="document.forms[0].submit(); " name="Image"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-tabs" id="tabs">
+                <li class="nav-item">
+                    <a class="active nav-link" onclick="Info()">Profile Info</a>
+                </li>
+                <li class="nav-item" th:if="${formData.isTeacher}">
+                    <a class="nav-link" onclick="MyTests()">Моите тестове</a>
+                </li>
+                <li class="nav-item" th:if="${!formData.isTeacher}">
+                    <a class="nav-link" onclick="Results()">Резултати</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="Read()">История</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="Like()">Харесани</a>
+                </li>
+            </ul>
+            <div class="tab-content pt-3">
+                <div class="tab-pane active" style="color: black !important" id="panels"
+                     th:if="${formData.isTeacher}">
+                    <div th:replace="~{user/userInfo}"></div>
+                </div>
+                <div class="tab-pane active" style="color: black !important; display: flex" id="panels"
+                     th:if="${!formData.isTeacher}">
+                    <div th:replace="~{user/userInfo}"></div>
+                </div>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            const userId = [[${id}]];
+        </script>
+        <script th:src="~{../static/js/viewProfile.js}"></script>
+    </main>
+</div>
+
+<footer th:replace="~{fragments/footer}"></footer>
+
+</body>
+</html>

@@ -34,8 +34,9 @@ public class Student extends BaseEntity{
         return school;
     }
     
-    public void setSchool(String school) {
+    public Student setSchool(String school) {
         this.school = school;
+        return this;
     }
     
     public List<TestResult> getTestResults() {
